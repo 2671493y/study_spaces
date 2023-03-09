@@ -2,4 +2,4 @@ from django.shortcuts import render
 from django.http import HttpResponse 
 
 def index(request):
-    return HttpResponse("Hi from view.py")
+    return HttpResponse("This is home page.")
