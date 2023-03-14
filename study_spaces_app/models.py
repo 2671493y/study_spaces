@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Comment(models.Model):
@@ -43,8 +44,7 @@ class UserProfile(models.Model):
         ('student', 'I am a student'),
         ('business', 'I am not a student'),
     ]
-    userName = models.CharField(max_length=NAME_MAX_LENGTH,unique = True)
-    password = models.CharField(max_length=PASSWORD_MAX_LENGTH)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True)
     userProfile = models.ImageField(upload_to='profile_images',blank=True)
     email = models.EmailField(max_length=EMAIL_MAX_LENGTH)
     userType = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
@@ -53,5 +53,5 @@ class UserProfile(models.Model):
 
 
     def __str__(self):
-        return self.userName
+        return self.user.username
     
