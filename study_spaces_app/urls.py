@@ -4,5 +4,6 @@ from study_spaces_app import views
 app_name = 'study_spaces_app'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.HomePage, name='HomePage'),
+    path('SignUp/',views.SignUp,name='SignUp')
 ]
