@@ -6,5 +6,5 @@ app_name = 'study_spaces_app'
 
 urlpatterns = [
     path('', views.HomePage, name='HomePage'),
-    path('SignUp/',views.SignUp,name='SignUp')
+    #path('SignUp/',views.SignUp,name='SignUp')
 ]
