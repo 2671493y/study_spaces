@@ -44,6 +44,9 @@ class Post(models.Model):
     def __str__(self):
         return self.pictureName
     
+    def get_posts_by_category(category_name):
+        return Post.objects.filter(category__category_name=category_name)
+    
 class Comment(models.Model):
     COMMENT_MAX_LENGTH = 500
     comment = models.CharField(max_length=COMMENT_MAX_LENGTH)
