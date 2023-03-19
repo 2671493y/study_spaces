@@ -1,10 +1,5 @@
-{% if user_is_authenticated %}
-    <a href="{% url 'study_spaces_app:userManagement' %}">User Management</a> |
-    <form method="POST" action="{% url 'study_spaces_app:Logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-{% else %}
-    <a href="{% url 'study_spaces_app:Signup' %}">Sign Up</a> |
-    <a href="{% url 'study_spaces_app:Login' %}">Log In</a>
-{% endif %}
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>this is homepage</h2><br>
+{% endblock %}
