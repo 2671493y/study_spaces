@@ -4,11 +4,8 @@
 <h2>My Account:  {{request.user.username}}<h2>
     {% if user %}
     <p>{{request.user.email}}</p>
-    <img src="{{MEDIA_URL}}/{{user.user_profile}}" alt = "profile Image"><br>
-    <form method="POST" action="{% url 'study_spaces_app:Logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>    
+    <img src="{{MEDIA_URL}}/{{user_profile.user_profile}}" alt="profile Image"><br>
+    <button class="btn btn-primary" type="button" onclick="window.location.href='{% url 'study_spaces_app:changeDetails' %}'">Edit your account settings</button><br>   
     {% endif %}
 <h2> my Posts</h2>
 {% if posts%}
