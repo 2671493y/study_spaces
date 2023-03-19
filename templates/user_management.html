@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Account:  {{request.user.username}}<h2>
+    {% if user %}
+    <p>{{request.user.email}}</p>
+    <img src="{{MEDIA_URL}}/{{user.user_profile}}" alt = "profile Image"><br>
+    <form method="POST" action="{% url 'study_spaces_app:Logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>    
+    {% endif %}
+<h2> my Posts</h2>
+{% if posts%}
+{% for p in posts %}
+<p>{{p.pictureName}}</p>
+<p>{{p.description}}</p>
+{%if p.picture%}
+<img src="{{p.picture}}" alt= "picture">
+{%endif%}
+{% endfor %}
+{%endif%}
+
+{% endblock %}

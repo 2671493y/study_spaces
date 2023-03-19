@@ -69,3 +69,12 @@ def register(request):
 def logout_view(request):
     logout(request)
     return redirect('study_spaces_app:HomePage')
+
+@login_required         
+def user_management(request):
+    userProfile = UserProfile.objects.get(user=request.user)
+    userPosts = Post.objects.filter(user_profile=userProfile)
+    context_dict = {'user':userProfile,'posts':userPosts}
+    print(userProfile.user_profile)
+    
+    return render(request,'user_management.html',context=context_dict)
