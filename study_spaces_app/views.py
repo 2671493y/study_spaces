@@ -90,13 +90,17 @@ def change_account_details(request):
         password = request.POST.get('password')
         email = request.POST.get('email')
         errors = []
-        if username and username != user.username:
-            if User.objects.filter(username=username).exists():
+        if username:
+            if username == user.username:
+                errors.append('Username cannot be the same as before.')
+            elif User.objects.filter(username=username).exists():
                 errors.append('Username already exists')
             else:
                 user.username = username
-        if email and email != user.email:
-            if User.objects.filter(email=email).exists():
+        if email: 
+            if email != user.email:
+                errors.append('Email cannot be the same as before.')
+            elif User.objects.filter(email=email).exists():
                 errors.append('Email already exists')
             else:
                     user.email = email
