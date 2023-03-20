@@ -6,5 +6,9 @@ app_name = 'study_spaces_app'
 
 urlpatterns = [
     path('', views.HomePage, name='HomePage'),
-    # path('SignUp/',views.SignUp,name='SignUp')
+    path('login',views.login_user,name = "Login"),
+    path('signup',views.register,name = "Signup"),
+    path('logout', views.logout_view, name='Logout'),
+    path('user-management',views.user_management,name="userManagement"),
+    path('change-details',views.change_account_details,name="changeDetails")
 ]

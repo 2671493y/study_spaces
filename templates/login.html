@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Login</h1>
+  {% if error_message %}
+    <p>{{ error_message }}</p>
+  {% endif %}
+  <form id="login" method="post" action="">
+    {% csrf_token %}
+    <label for="Username">Username:</label>
+    <input type="text" name="Username" value="" /><br>
+    <label for="Password">Password:</label>
+    <input type="password" name="Password" value="" /><br>
+    <input type="submit" value="Login" />
+  </form>
+  <br>
+  <p>Not registered yet?</p>
+  <button onclick="location.href='{% url 'study_spaces_app:Signup' %}'">Sign up</button>
+{% endblock %}

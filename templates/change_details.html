@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Change details of {{ request.user }}</h1>
+{% if errors %}
+    <ul class="errors">
+        {% for error in errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form method="post" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label>Username: {{ request.user.username }}</label><button type="button" onclick="showInput('username')">Edit</button>
+  <input type="text" name="username" id="username" style="display:none"><br>
+  <label>Password: *********</label><button type="button" onclick="showInput('password')">Edit</button>
+  <input type="password" name="password" id="password" style="display:none"><br>
+  <label>Email: {{ request.user.email }}</label><button type="button" onclick="showInput('email')">Edit</button>
+  <input type="email" name="email" id="email" style="display:none"><br>
+  <label for="user_profile">Image:</label><button type="button" onclick="showInput('user_profile')">Edit</button>
+  <input type="file" name="user_profile" id="user_profile" accept="image/*" style="display:none"><br>
+  <button type="submit">Submit</button>
+</form>
+<br>
+<a href="{% url 'study_spaces_app:userManagement' %}"><button>Back to User Management</button></a>
+
+<script>
+function showInput(fieldName) {
+  var input = document.getElementById(fieldName);
+  if (input.style.display === "none") {
+      input.style.display = "block";
+  } else {
+      input.style.display = "none";
+  }
+}
+</script>
+
+{% endblock %}

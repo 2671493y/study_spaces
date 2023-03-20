@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>
-        StudySpaces-
-        {% block title_block %}
-        StudySpaces
-        {% endblock %}
-    </title>
-</head>
-<body>
-    <div>
-        {% block body_block %}
-
-        {% endblock %}
-    </div>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="{% url 'study_spaces_app:HomePage' %}">Home</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'study_spaces_app:userManagement' %}">My account</a></li>
+          <li><a href="{% url 'study_spaces_app:Logout' %}">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'study_spaces_app:Login' %}">Login</a></li>
+          <li><a href="{% url 'study_spaces_app:Signup' %}">Sign up</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% block content %}
+    {% endblock %}
+  </body>
 </html>
