@@ -89,6 +89,7 @@ def change_account_details(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         email = request.POST.get('email')
+        uploaded_file = request.FILES.get('user_profile')
         errors = []
         if username:
             if username == user.username:
@@ -113,15 +114,12 @@ def change_account_details(request):
                 logout(request)
                 messages.success(request, 'Password changed successfully. Please log in again.')
                 return redirect('study_spaces_app:Login')
-        if 'user_profile' in request.FILES:
-            if userProfile.user_profile == request.FILES['user_profile']:
-                errors.append('User profile cannot be the same as before.')
-            else:
-                userProfile.user_profile = request.FILES['user_profile']
+        if uploaded_file:
+            userProfile.user_profile = uploaded_file
         user.save()
         userProfile.save()
         
         if errors:
             return render(request, 'change_details.html', {'errors': errors})
-    
+    print("saved!2==========")
     return render(request,'change_details.html')

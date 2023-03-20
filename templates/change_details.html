@@ -27,8 +27,8 @@
   <input type="password" name="password" id="password" style="display:none"><br>
   <label>Email: {{ request.user.email }}</label><button type="button" onclick="showInput('email')">Edit</button>
   <input type="email" name="email" id="email" style="display:none"><br>
-  <label for="image">Image:</label><button type="button" onclick="showInput('image')">Edit</button>
-  <input type="file" name="image" id="image" accept="image/*" style="display:none"><br>
+  <label for="user_profile">Image:</label><button type="button" onclick="showInput('user_profile')">Edit</button>
+  <input type="file" name="user_profile" id="user_profile" accept="image/*" style="display:none"><br>
   <button type="submit">Submit</button>
 </form>
 <br>
@@ -46,4 +46,3 @@ function showInput(fieldName) {
 </script>
 
 {% endblock %}
-  
