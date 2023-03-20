@@ -104,12 +104,15 @@ def change_account_details(request):
                 errors.append('Email already exists')
             else:
                     user.email = email
-        if password and not user.check_password(password):
-            user.set_password(password)
-            user.save()
-            logout(request)
-            messages.success(request, 'Password changed successfully. Please log in again.')
-            return redirect('study_spaces_app:Login')
+        if password: 
+            if user.check_password(password):
+                errors.append('New password cannot be the same as current password.')    
+            else:
+                user.set_password(password)
+                user.save()
+                logout(request)
+                messages.success(request, 'Password changed successfully. Please log in again.')
+                return redirect('study_spaces_app:Login')
         if 'user_profile' in request.FILES:
             if userProfile.user_profile == request.FILES['user_profile']:
                 errors.append('User profile cannot be the same as before.')
