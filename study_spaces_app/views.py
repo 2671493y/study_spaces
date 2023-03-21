@@ -131,5 +131,4 @@ def change_account_details(request):
         
         if errors:
             return render(request, 'change_details.html', {'errors': errors})
-    print("saved!2==========")
     return render(request,'change_details.html')
