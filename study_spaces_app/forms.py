@@ -22,9 +22,10 @@ class UserForm(forms.ModelForm):
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError('Username is already taken')
         return username
-        
+      
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('userType','userType','user_profile')
+        labels = {'user_profile': 'Profile Picture'}
         
