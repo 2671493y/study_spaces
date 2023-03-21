@@ -9,6 +9,33 @@
         {{ error_message }}
       </div>
     {% endif %}
+    {% if username_errors %}
+      <div class="alert alert-danger" role="alert">
+        <ul>
+          {% for error in username_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    {% if email_errors %}
+      <div class="alert alert-danger" role="alert">
+        <ul>
+          {% for error in email_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    {% if profile_errors %}
+      <div class="alert alert-danger" role="alert">
+        <ul>
+          {% for error in profile_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
     <form id="user_form" method="post" action="" enctype="multipart/form-data">
       {% csrf_token %}
       {% for field in user_form %}
@@ -45,11 +72,6 @@
         </div>
       {% endfor %}
       <button type="submit" name="submit" class="btn btn-primary">Register</button>
-        {% if error_message %}
-            <div class="alert alert-danger" role="alert">
-                {{ error_message }}
-            </div>
-        {% endif %}
     </form>
   </div>
 </div>

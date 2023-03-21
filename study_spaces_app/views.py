@@ -48,35 +48,34 @@ def login_user(request):
     return render(request, 'login.html', context=context)
 
 def register(request):
-    error_message = ''
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
-        
+        profile_form = UserProfileForm(request.POST, request.FILES)
+
         if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            
+            user = user_form.save(commit=False)
             user.set_password(user.password)
             user.save()
-            
-            profile = profile_form.save(commit = False)
+
+            profile = profile_form.save(commit=False)
             profile.user = user
-            
-            if 'user_profile' in request.FILES:
-                print("IMAGE HERE")
-                profile.user_profile = request.FILES['user_profile']
-                
             profile.save()
-            
+
             login_url = reverse('study_spaces_app:Login')
             return redirect(login_url)
-        else:
-            error_message=user_form.errors,profile_form.errors
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-    
-    return render(request,'signup.html',context = {'user_form':user_form,'profile_form':profile_form,'error_message': error_message})
+
+    return render(request, 'signup.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'user_errors': user_form.errors.get('__all__', None),
+        'username_errors': user_form.errors.get('username', None),
+        'email_errors': user_form.errors.get('email', None),
+        'profile_errors': profile_form.errors.get('__all__', None),
+    })
+
 
 @login_required
 def logout_view(request):
