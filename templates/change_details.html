@@ -1,48 +1,79 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Change details of {{ request.user }}</h1>
-{% if errors %}
-    <ul class="errors">
-        {% for error in errors %}
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h1 class="mb-4">Change details of {{ request.user }}</h1>
+    {% if errors %}
+      <div class="alert alert-danger" role="alert">
+        <ul>
+          {% for error in errors %}
             <li>{{ error }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
-
-{% if messages %}
-    <ul class="messages">
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    {% if messages %}
+      <ul class="messages">
         {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
         {% endfor %}
-    </ul>
-{% endif %}
-
-<form method="post" action="" enctype="multipart/form-data">
-  {% csrf_token %}
-  <label>Username: {{ request.user.username }}</label><button type="button" onclick="showInput('username')">Edit</button>
-  <input type="text" name="username" id="username" style="display:none"><br>
-  <label>Password: *********</label><button type="button" onclick="showInput('password')">Edit</button>
-  <input type="password" name="password" id="password" style="display:none"><br>
-  <label>Email: {{ request.user.email }}</label><button type="button" onclick="showInput('email')">Edit</button>
-  <input type="email" name="email" id="email" style="display:none"><br>
-  <label for="user_profile">Image:</label><button type="button" onclick="showInput('user_profile')">Edit</button>
-  <input type="file" name="user_profile" id="user_profile" accept="image/*" style="display:none"><br>
-  <button type="submit">Submit</button>
-</form>
-<br>
-<a href="{% url 'study_spaces_app:userManagement' %}"><button>Back to User Management</button></a>
+      </ul>
+    {% endif %}
+    <form method="post" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="username" class="form-label">Username: {{ request.user.username }}</label>
+        <button type="button" class="btn btn-outline-primary" onclick="showInput('username')">Edit</button>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password: *********</label>
+        <button type="button" class="btn btn-outline-primary" onclick="showInput('password')">Edit</button>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email: {{ request.user.email }}</label>
+        <button type="button" class="btn btn-outline-primary" onclick="showInput('email')">Edit</button>
+      </div>
+      <div class="mb-3">
+        <label for="user_profile" class="form-label">Profile Picture:</label>
+        <button type="button" class="btn btn-outline-primary" onclick="showInput('user_profile')">Edit</button>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div class="mt-3">
+      <a href="{% url 'study_spaces_app:userManagement' %}" class="btn btn-secondary">Back to User Management</a>
+    </div>
+  </div>
+</div>
 
 <script>
-function showInput(fieldName) {
-  var input = document.getElementById(fieldName);
-  if (input.style.display === "none") {
-      input.style.display = "block";
-  } else {
-      input.style.display = "none";
+  function showInput(fieldName) {
+    var input = document.getElementById(fieldName);
+    
+    if (!input) {
+      var label = document.querySelector('label[for="' + fieldName + '"]');
+      input = document.createElement('input');
+      input.type = fieldName === 'password' ? 'password' : 'text';
+      input.name = fieldName;
+      input.id = fieldName;
+      input.className = 'form-control mt-2';
+      input.autocomplete = 'off';
+      
+      if (fieldName === 'user_profile') {
+        input.type = 'file';
+        input.accept = 'image/*';
+      }
+      
+      label.parentNode.insertBefore(input, label.nextSibling);
+    } else {
+      if (input.style.display === "none") {
+        input.style.display = "block";
+      } else {
+        input.style.display = "none";
+      }
+    }
   }
-}
+  
 </script>
 
 {% endblock %}
