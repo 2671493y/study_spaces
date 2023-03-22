@@ -1,21 +1,29 @@
 {% extends 'bootstrap-base.html' %}
 
+
 {% block body_block %}
 <h2>My Account:  {{request.user.username}}<h2>
     {% if user %}
-    <p>{{request.user.email}}</p>
-    <img src="{{MEDIA_URL}}/{{user_profile.user_profile}}" alt="profile Image"><br>
-    <button class="btn btn-primary" type="button" onclick="window.location.href='{% url 'study_spaces_app:changeDetails' %}'">Edit your account settings</button><br>   
+      <p>Email: {{ request.user.email }}</p>
+      <img class="img-thumbnail" src="{{ MEDIA_URL }}/{{ user_profile.user_profile }}" alt="profile Image" style="width: 200px; height: 200px;"><br>
+      <button class="btn btn-primary mt-3 mb-3" type="button" onclick="window.location.href='{% url 'study_spaces_app:changeDetails' %}'">Edit your account settings</button><br>
     {% endif %}
-<h2> my Posts</h2>
-{% if posts%}
-{% for p in posts %}
-<p>{{p.pictureName}}</p>
-<p>{{p.description}}</p>
-{%if p.picture%}
-<img src="{{p.picture}}" alt= "picture">
-{%endif%}
-{% endfor %}
-{%endif%}
-
+    <h2>My Posts</h2>
+    {% if posts %}
+      {% for p in posts %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ p.pictureName }}</h5>
+            <p class="card-text">{{ p.description }}</p>
+            {% if p.picture %}
+              <img class="card-img-top" src="{{ p.picture }}" alt="Picture">
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>You have not created any posts yet.</p>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}
