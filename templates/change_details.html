@@ -38,7 +38,7 @@
         <label for="user_profile" class="form-label">Profile Picture:</label>
         <button type="button" class="btn btn-outline-primary" onclick="showInput('user_profile')">Edit</button>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button id="submit-button" type="submit" class="btn btn-primary" disabled>Apply changes</button>
     </form>
     <div class="mt-3">
       <a href="{% url 'study_spaces_app:userManagement' %}" class="btn btn-secondary">Back to User Management</a>
@@ -58,6 +58,7 @@
       input.id = fieldName;
       input.className = 'form-control mt-2';
       input.autocomplete = 'off';
+      input.oninput = enableSubmitButton;
       
       if (fieldName === 'user_profile') {
         input.type = 'file';
@@ -72,6 +73,10 @@
         input.style.display = "none";
       }
     }
+  }
+
+  function enableSubmitButton() {
+    document.getElementById("submit-button").disabled = false;
   }
   
 </script>
