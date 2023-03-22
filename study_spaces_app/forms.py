@@ -29,4 +29,3 @@ class UserProfileForm(forms.ModelForm):
         fields = ('userType','userType','user_profile')
         labels = {'user_profile': 'Profile Picture'}
         
-class CreatePostForm(forms.ModelForm):
