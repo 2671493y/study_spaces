@@ -22,15 +22,13 @@ def populate():
     user_profile3 = createAccounts("user3","password333","Student","user3@email")
 
     post1 = Post.objects.get_or_create(
-        pictureName='JMS',
+        postName = 'JMS learning hub',
+        pictureName='James McCune Smith Learning Hub 066.jpg',
         description='This is the JMS.',
         address='110 University Ave G12 8QW Scotland',
         category=category1,
         user_profile = user_profile1
     )[0]
-
-
-
     image_path = finders.find('images/James McCune Smith Learning Hub 066.jpg')
     if image_path:
         with open(image_path, 'rb') as f:
@@ -38,7 +36,8 @@ def populate():
 
 
     post2 = Post.objects.get_or_create(
-        pictureName='Fraser building',
+        postName = 'Fraser Building',
+        pictureName='fraserBuilding',
         description='This is Fraser building.',
         address='65 Hillhead St Glasgow G12 8QF Scotland',
         category=category2,
@@ -51,7 +50,8 @@ def populate():
             post2.picture.save(os.path.basename(image_path), File(f), save=True)
 
     post3 = Post.objects.get_or_create(
-        pictureName='University cafe',
+        postName = ' University cafe',
+        pictureName='university-cafe',
         description='This is the University cafe.',
         address='87 Byres Road Glasgow G11 5HN Scotland',
         category=category3,
