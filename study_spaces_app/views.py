@@ -74,6 +74,8 @@ def register(request):
         'user_errors': user_form.errors.get('__all__', None),
         'username_errors': user_form.errors.get('username', None),
         'email_errors': user_form.errors.get('email', None),
+        'password_errors': user_form.errors.get('password', None),
+        'confirm_password_errors': user_form.errors.get('confirm_password', None),
         'profile_errors': profile_form.errors.get('__all__', None),
     })
 
