@@ -20,6 +20,8 @@ from study_spaces_app import views
 from django.conf import settings
 from django.conf.urls.static import static
 from study_spaces_app.views import category_library,category_cafe
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 
 urlpatterns = [

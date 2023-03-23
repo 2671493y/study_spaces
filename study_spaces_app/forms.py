@@ -77,10 +77,3 @@ class PostForm(forms.ModelForm):
         required=False,
         widget=forms.ClearableFileInput(attrs={'class': 'form-control'})
     )
-
-    def clean_picture(self):
-        picture = self.cleaned_data.get('picture')
-        if picture:
-            self.instance.pictureName = picture.name
-        return picture
-
