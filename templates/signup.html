@@ -36,6 +36,24 @@
         </ul>
       </div>
     {% endif %}
+    {% if password_errors %}
+      <div class="alert alert-danger" role="alert">
+        <ul>
+          {% for error in password_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    {% if confirm_password_errors %}
+      <div class="alert alert-danger" role="alert">
+        <ul>
+          {% for error in confirm_password_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
     <form id="user_form" method="post" action="" enctype="multipart/form-data">
       {% csrf_token %}
       {% for field in user_form %}
