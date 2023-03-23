@@ -1,0 +1,87 @@
+{% extends 'bootstrap-base.html' %}
+
+{% block custom_css %}
+<style>
+  .card-header {
+    font-size: 24px;
+  }
+
+  .card-img-top {
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .card-img-top {
+    object-fit: cover;
+    height: 200px;
+    width: 500px;
+    border-radius: 10px;
+  }
+
+  .card-text {
+    margin-bottom: 0.5rem;
+  }
+
+  .comments-header {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 24px;
+    font-weight: bold;
+  }
+</style>
+{% endblock %}
+
+{% block body_block %}
+
+{% for post in posts %}
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="/static/images/{{ post.pictureName }}" alt="{{ post.pictureName }}" class="card-img-top img-thumbnail">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ post.postName }}</h5>
+        <p class="card-text">Poster :  {{ post.user_profile }}        ({{post.user_profile.getUserType}})</p>
+        <p class="card-text"><small class="text-muted">Address: {{ post.address }}</small></p>
+        <p class="card-text">Description:{{ post.description }}</p>
+        {% if user.is_authenticated %}
+        <form action="{% url 'like_post' post_id=post.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Like 👍: {{ post.likes }}</button>
+        </form>
+        {% else %}
+        <p class="card-text">Likes 👍: {{ post.likes }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="card-body">
+    <h3 class="comments-header">Comments</h3>
+
+    {% if user.is_authenticated %}
+    <form method="POST" action="{% url 'add_comment' post_id=post.id%}?category_name={{ category.category_name }}" class="mb-3">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% endif %}
+
+    {% for comment in post.comment_set.all %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text">{{ comment.comment }}</p>
+        <p class="card-text"><small class="text-muted">Comment by: {{ comment.user_profile }}</small></p>
+      </div>
+    </div>
+    {% empty %}
+    <p>No comments yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -6,9 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from study_spaces_app.forms import UserForm, UserProfileForm
-from study_spaces_app.models import UserProfile, Post
+from study_spaces_app.models import UserProfile, Post,Category,Comment
 from django.contrib.auth.models import User
 from django.contrib import messages
+
 
 def HomePage(request):
     if request.user.is_authenticated:
@@ -132,3 +133,88 @@ def change_account_details(request):
         if errors:
             return render(request, 'change_details.html', {'errors': errors})
     return render(request,'change_details.html')
+
+def category_library(request, category_name='Library'):
+    category = Category.objects.get(category_name=category_name)
+    posts = Post.objects.filter(category=category)
+    context = {'category': category, 'posts': posts}
+    post_comments = {}
+
+    for post in posts:
+        comments = Comment.objects.filter(post=post)
+        post_comments[post.id] = comments
+
+    context = {
+        'posts': posts,
+        'post_comments': post_comments
+    }
+    return render(request, 'category.html', context)
+
+def category_cafe(request, category_name='cafe'):
+    category = Category.objects.get(category_name=category_name)
+    posts = Post.objects.filter(category=category)
+    context = {'category': category, 'posts': posts}
+    post_comments = {}
+
+    for post in posts:
+        comments = Comment.objects.filter(post=post)
+        post_comments[post.id] = comments
+
+    context = {
+        'posts': posts,
+        'post_comments': post_comments
+    }
+    return render(request, 'category.html', context)
+
+def category_other(request, category_name='Other Place'):
+    category = Category.objects.get(category_name=category_name)
+    posts = Post.objects.filter(category=category)
+    context = {'category': category, 'posts': posts}
+    post_comments = {}
+
+    for post in posts:
+        comments = Comment.objects.filter(post=post)
+        post_comments[post.id] = comments
+
+    context = {
+        'posts': posts,
+        'post_comments': post_comments
+    }
+    return render(request, 'category.html', context)
+
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    user = request.user
+    session_key = f'post_{post_id}_liked'
+    
+    if request.session.get(session_key, False):
+        post.likes -= 1
+        post.save()
+        request.session[session_key] = False
+    else:
+        post.likes += 1
+        post.save()
+        request.session[session_key] = True
+    
+    return redirect('category_library', category_name=post.category.category_name)
+
+
+
+
+@login_required
+def add_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        comment_text = request.POST.get('comment')
+        user_profile = request.user.userprofile
+
+        comment = Comment(comment=comment_text, user_profile=user_profile, post=post)
+        comment.save()
+
+        category_name = post.category.category_name
+        url = reverse('category_library', kwargs={'category_name': category_name})
+        return redirect(url)
+
+    return redirect('study_spaces_app:category_library')
+

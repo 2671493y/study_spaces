@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class UserProfile(models.Model):
     NAME_MAX_LENGTH = 50
     PASSWORD_MAX_LENGTH = 50
@@ -13,8 +14,10 @@ class UserProfile(models.Model):
     user_profile = models.ImageField(upload_to='profile_images',blank=True)
     email = models.EmailField(max_length=EMAIL_MAX_LENGTH)
     userType = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
-    # post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    # comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    
+    def getUserType(self):
+        return self.userType
+
 
     def __str__(self):
         return self.user.username
@@ -56,3 +59,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
+

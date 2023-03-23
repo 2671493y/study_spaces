@@ -29,6 +29,18 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+                <!-- add home page section below this comment -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'study_spaces_app:category_library' %}">Library</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'study_spaces_app:category_cafe' %}">Cafe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'study_spaces_app:category_other' %}">Other Place</a>
+                    </li>
+                </ul>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                 {% if user.is_authenticated %}
@@ -49,6 +61,7 @@
                         <a class="nav-link" href="{% url 'study_spaces_app:Signup' %}">Sign up</a>
                     </li>
                 {% endif %}
+
                 </ul>
             </div>
         </div>

@@ -28,4 +28,4 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('userType','userType','user_profile')
         labels = {'user_profile': 'Profile Picture'}
-        
+

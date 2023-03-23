@@ -19,9 +19,18 @@ from django.urls import include
 from study_spaces_app import views
 from django.conf import settings
 from django.conf.urls.static import static
+from study_spaces_app.views import category_library,category_cafe
+
 
 urlpatterns = [
     path('', views.HomePage, name='HomePage'),
     path('study_spaces/', include('study_spaces_app.urls')),
     path('admin/', admin.site.urls),
+    path('like_post/<int:post_id>/', views.like_post, name='like_post'),
+    path('add_comment/<int:post_id>/', views.add_comment, name='add_comment'),
+    path('category_library/<str:category_name>/', category_library, name='category_library'),
+    path('category_cafe/<str:category_name>/', category_cafe, name='category_cafe'),
+    path('category_other/<str:category_name>/', category_cafe, name='category_other'),
+
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
