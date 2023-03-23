@@ -4,10 +4,6 @@
 <link rel = "stylesheet" type="text/css" href="/static/css/categoryStyle.css">
 {% endblock %}
 
-{% block title_block %}
-  {{ category_name }}
-{% endblock %}
-
 {% block body_block %}
 <h1>{{category_name}}</h1>
 {% for post in posts %}
