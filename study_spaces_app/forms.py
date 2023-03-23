@@ -62,11 +62,6 @@ class PostForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
 
-    pictureName = forms.CharField(
-        label='Picture Name',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-
     description = forms.CharField(
         label='Description',
         widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3})
@@ -82,3 +77,10 @@ class PostForm(forms.ModelForm):
         required=False,
         widget=forms.ClearableFileInput(attrs={'class': 'form-control'})
     )
+
+    pictureName = forms.CharField(
+        label='Picture Name',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+   

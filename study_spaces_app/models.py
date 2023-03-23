@@ -35,10 +35,10 @@ class Category(models.Model):
 
 class Post(models.Model):
     postName = models.CharField(max_length=100,default=None)
-    pictureName = models.CharField(max_length=PICTURE_NAME_MAX_LENGTH)
-    picture = models.ImageField(upload_to='static/images',blank=True)
     description = models.CharField(max_length=DESCRIPTION_MAX_LENGTH)
     address = models.CharField(max_length=ADDRESS_MAX_LENGTH)
+    picture = models.ImageField(upload_to='static/images', blank=True)
+    pictureName = models.CharField(max_length=PICTURE_NAME_MAX_LENGTH)
     likes = models.IntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
