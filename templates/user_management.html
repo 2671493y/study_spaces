@@ -1,4 +1,9 @@
 {% extends 'bootstrap-base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Account details   
+{% endblock %}
 
 {% block body_block %}
   <h2>My Account:  {{request.user.username}}<h2>
