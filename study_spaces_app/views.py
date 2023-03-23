@@ -231,7 +231,7 @@ def create_post(request):
             post = form.save(commit=False)
             post.user_profile = request.user.userprofile
             post.save()
-            return redirect('home')
+            return redirect('study_spaces_app:HomePage')
     else:
         form = PostForm()
     return render(request, 'createPost.html', {'form': form})
