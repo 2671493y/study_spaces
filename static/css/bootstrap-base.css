@@ -1,0 +1,13 @@
+.navbar-nav {
+  margin-left: auto;
+}
+.nav-item {
+  margin-right: 20px;
+}
+.profile-picture {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
