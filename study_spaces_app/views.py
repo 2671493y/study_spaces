@@ -137,7 +137,6 @@ def change_account_details(request):
 def category_library(request, category_name='Library'):
     category = Category.objects.get(category_name=category_name)
     posts = Post.objects.filter(category=category)
-    context = {'category': category, 'posts': posts}
     post_comments = {}
 
     for post in posts:
@@ -145,15 +144,16 @@ def category_library(request, category_name='Library'):
         post_comments[post.id] = comments
 
     context = {
-        'posts': posts,
-        'post_comments': post_comments
-    }
+            'category': category,
+            'posts': posts,
+            'post_comments': post_comments,
+            'category_name': category_name
+        }
     return render(request, 'category.html', context)
 
-def category_cafe(request, category_name='cafe'):
+def category_cafe(request, category_name='Cafe'):
     category = Category.objects.get(category_name=category_name)
     posts = Post.objects.filter(category=category)
-    context = {'category': category, 'posts': posts}
     post_comments = {}
 
     for post in posts:
@@ -161,25 +161,28 @@ def category_cafe(request, category_name='cafe'):
         post_comments[post.id] = comments
 
     context = {
-        'posts': posts,
-        'post_comments': post_comments
-    }
+            'category': category,
+            'posts': posts,
+            'post_comments': post_comments,
+            'category_name': category_name
+        }
     return render(request, 'category.html', context)
 
 def category_other(request, category_name='Other Place'):
     category = Category.objects.get(category_name=category_name)
     posts = Post.objects.filter(category=category)
-    context = {'category': category, 'posts': posts}
     post_comments = {}
 
     for post in posts:
         comments = Comment.objects.filter(post=post)
         post_comments[post.id] = comments
-
+    
     context = {
-        'posts': posts,
-        'post_comments': post_comments
-    }
+            'category': category,
+            'posts': posts,
+            'post_comments': post_comments,
+            'category_name': category_name
+        }
     return render(request, 'category.html', context)
 
 @login_required

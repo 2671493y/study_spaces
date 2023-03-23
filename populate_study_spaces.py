@@ -15,7 +15,7 @@ from django.core.files import File
 def populate():
     category1 = Category.objects.get_or_create(category_name='Library')[0]
     category2 = Category.objects.get_or_create(category_name='Other Place')[0]
-    category3 = Category.objects.get_or_create(category_name='cafe')[0]
+    category3 = Category.objects.get_or_create(category_name='Cafe')[0]
 
     user_profile1 = createAccounts("Eve","password111","Student","user1@email")
     user_profile2 = createAccounts("Cindy","password222","Student","user2@email")
