@@ -1,7 +1,6 @@
 {% extends 'bootstrap-base.html' %}
 
 {% block custom_css %}
-
 <link rel = "stylesheet" type="text/css" href="/static/css/categoryStyle.css">
 {% endblock %}
 
@@ -24,13 +23,15 @@
         <p class="card-text"><small class="text-muted">Address: {{ post.address }}</small></p>
         <p class="card-text">Description:{{ post.description }}</p>
         {% if user.is_authenticated %}
+        
         <form action="{% url 'like_post' post_id=post.id %}" method="post">
           {% csrf_token %}
-          <button type="submit" class="btn btn-primary">Like 👍: {{ post.likes }}</button>
+          <button type="submit" class="btn btn-primary" id="like-{{ post.id }}">Likes 👍: {{ post.likes }}</button>
         </form>
         {% else %}
         <p class="card-text">Likes 👍: {{ post.likes }}</p>
         {% endif %}
+      
       </div>
     </div>
   </div>
@@ -48,6 +49,7 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     {% endif %}
+
 
     {% for comment in post.comment_set.all %}
     <div class="card mb-3">
