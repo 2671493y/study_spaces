@@ -9,7 +9,7 @@
   <h2>My Account:  {{request.user.username}}<h2>
   {% if user %}
     <p style="font-size: 18px;">Email: {{ request.user.email }}</p>
-    <img class="img-thumbnail" src="{{ MEDIA_URL }}/{{ user_profile.user_profile }}" alt="profile Image" style="width: 200px; height: 200px;"><br>
+    <img class="img-thumbnail" src="{{ user.userprofile.user_profile.url }}" alt="profile Image" style="width: 200px; height: 200px;"><br>
     <button class="btn btn-primary mt-3 mb-3" type="button" onclick="window.location.href='{% url 'study_spaces_app:changeDetails' %}'">Edit your account settings</button><br>
   {% endif %}
   <h2>My Posts</h2>
