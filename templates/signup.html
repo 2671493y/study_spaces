@@ -1,4 +1,9 @@
 {% extends 'bootstrap-base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Create a new account  
+{% endblock %}
 
 {% block body_block %}
 <div class="row">
@@ -82,16 +87,18 @@
               </select>
             </div>
           {% else %}
-            <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
-            <div class="input-group">
-              {{ field }}
-            </div>
-          {% endif %}
-        </div>
-      {% endfor %}
-      <button type="submit" name="submit" class="btn btn-primary">Register</button>
-    </form>
-  </div>
+          <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
+          <div class="input-group">
+            {{ field }}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" name="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>
 </div>
 {% endblock %}
+
+
 

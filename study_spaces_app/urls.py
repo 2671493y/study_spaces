@@ -16,7 +16,7 @@ urlpatterns = [
     path('category_library', views.category_library, name='category_library'),
     path('category_cafe', views.category_cafe, name='category_cafe'),
     path('category_other', views.category_other, name='category_other'),
-
+    path('delete_post/<int:post_id>/', views.delete_post, name='delete_post'),
 
     
 ]

@@ -27,7 +27,8 @@ def populate():
         description='The James McCune Smith Learning Hub is a world-leading learning and teaching facility named after the prominent civil rights activist and first African American to be awarded a medical degree, awarded by the University of Glasgow in 1837.The building has space for over 2,500 students.You ll find a friendly Reach Out team around to help with any questions.',
         address='110 University Ave G12 8QW Scotland',
         category=category1,
-        user_profile = user_profile1
+        user_profile = user_profile1,
+        likes = 88,
     )[0]
     image_path = finders.find('images/James McCune Smith Learning Hub 066.jpg')
     if image_path:
@@ -41,7 +42,8 @@ def populate():
         description='Originally known as the Refectory, the Fraser Building began its development in 1963 to a design by Frank Fielden & Associates in order to meet increased demand for catering and social facilities. The building, which cost £283,000, was opened on 21 February 1966.',
         address='65 Hillhead St Glasgow G12 8QF Scotland',
         category=category2,
-        user_profile = user_profile2
+        user_profile = user_profile2,
+        likes = 10,
     )[0]
 
     image_path = finders.find('images/fraserBuilding.jpg')
@@ -55,7 +57,8 @@ def populate():
         description='The University Cafe is a much-loved Glasgow institution. Run by the same Italian family for generations, it has barely changed since the 1930s. The seating capacity is limited, with booths consisting of fixed tip-up seats around each table.',
         address='87 Byres Road Glasgow G11 5HN Scotland',
         category=category3,
-        user_profile=user_profile3
+        user_profile=user_profile3,
+        likes = 66,
     )[0]
 
     image_path = finders.find('images/university-cafe.jpg')
@@ -67,9 +70,10 @@ def populate():
         postName = 'University library',
         pictureName='university_library.jpg',
         description='The University Library has been in existence since the foundation of the University in 1451, and has always been at the centre of the University community. Relocating from the city centre in 1870 to the Gilmorehill campus, the Library continued to evolve and adapt, moving again in 1968 to its current location – a 12 storey building on Hillhead Street.',
-        address='University Of, Hillhead St, Glasgow G12 8QE',
+        address='Hillhead St, Glasgow G12 8QE',
         category=category1,
-        user_profile=user_profile3
+        user_profile=user_profile3,
+        likes = 2,
     )[0]
 
     image_path = finders.find('images/university_library.jpg')

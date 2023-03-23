@@ -235,3 +235,16 @@ def create_post(request):
     else:
         form = PostForm()
     return render(request, 'createPost.html', {'form': form})
+
+@login_required
+def delete_post(request, post_id):
+    user_profile = UserProfile.objects.get(user=request.user)
+    post = Post.objects.get(id=post_id, user_profile=user_profile)
+
+    if post:
+        post.delete()
+        messages.success(request, 'Post deleted successfully!')
+    else:
+        messages.error(request, 'Post not found or not authorized to delete.')
+
+    return redirect('study_spaces_app:userManagement')
