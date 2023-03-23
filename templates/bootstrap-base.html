@@ -43,6 +43,7 @@
                 </ul>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+
                 {% if user.is_authenticated %}
                     <li class="nav-item d-flex align-items-center">
                     {% if user.userprofile.user_profile %}
@@ -53,6 +54,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'study_spaces_app:Logout' %}">Logout</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'study_spaces_app:createPost' %}">Add Post</a>
+                    </li>
+
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'study_spaces_app:Login' %}">Login</a>

@@ -5,7 +5,7 @@ from django.core.validators import validate_email
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from study_spaces_app.forms import UserForm, UserProfileForm
+from study_spaces_app.forms import UserForm, UserProfileForm, PostForm
 from study_spaces_app.models import UserProfile, Post,Category,Comment
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -223,3 +223,15 @@ def add_comment(request, post_id):
 
     return redirect('study_spaces_app:category_library')
 
+@login_required
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user_profile = request.user.userprofile
+            post.save()
+            return redirect('home')
+    else:
+        form = PostForm()
+    return render(request, 'createPost.html', {'form': form})

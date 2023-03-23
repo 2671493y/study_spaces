@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from study_spaces_app.models import UserProfile
+from study_spaces_app.models import UserProfile, Post, PICTURE_NAME_MAX_LENGTH, DESCRIPTION_MAX_LENGTH, ADDRESS_MAX_LENGTH
 
 
 class UserForm(forms.ModelForm):
@@ -48,3 +48,37 @@ class UserProfileForm(forms.ModelForm):
         fields = ('userType','userType','user_profile')
         labels = {'user_profile': 'Profile Picture'}
 
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['postName', 'pictureName', 'picture', 'description', 'address', 'category']
+        widgets = {
+            'category': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+    postName = forms.CharField(
+        label='Post Name',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    pictureName = forms.CharField(
+        label='Picture Name',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    description = forms.CharField(
+        label='Description',
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3})
+    )
+
+    address = forms.CharField(
+        label='Address',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    picture = forms.ImageField(
+        label='Picture',
+        required=False,
+        widget=forms.ClearableFileInput(attrs={'class': 'form-control'})
+    )

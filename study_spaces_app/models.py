@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+PICTURE_NAME_MAX_LENGTH = 50
+DESCRIPTION_MAX_LENGTH = 500
+ADDRESS_MAX_LENGTH = 250
 
 class UserProfile(models.Model):
     NAME_MAX_LENGTH = 50
@@ -31,10 +34,6 @@ class Category(models.Model):
     
 
 class Post(models.Model):
-    PICTURE_NAME_MAX_LENGTH = 50
-    DESCRIPTION_MAX_LENGTH = 500
-    ADDRESS_MAX_LENGTH = 100
-
     postName = models.CharField(max_length=100,default=None)
     pictureName = models.CharField(max_length=PICTURE_NAME_MAX_LENGTH)
     picture = models.ImageField(upload_to='static/images',blank=True)
