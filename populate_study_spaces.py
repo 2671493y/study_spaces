@@ -1,5 +1,6 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'study_spaces.settings')
+from django.conf import settings
 
 
 import django
@@ -23,17 +24,18 @@ def populate():
 
     post1 = Post.objects.get_or_create(
         postName = 'JMS learning hub',
-        pictureName='James McCune Smith Learning Hub 066.jpg',
+        pictureName='JamesMcCuneSmithLearningHub066.jpg',
         description='The James McCune Smith Learning Hub is a world-leading learning and teaching facility named after the prominent civil rights activist and first African American to be awarded a medical degree, awarded by the University of Glasgow in 1837.The building has space for over 2,500 students.You ll find a friendly Reach Out team around to help with any questions.',
         address='110 University Ave G12 8QW Scotland',
         category=category1,
         user_profile = user_profile1,
         likes = 88,
     )[0]
-    image_path = finders.find('images/James McCune Smith Learning Hub 066.jpg')
+    image_path = finders.find('images/JamesMcCuneSmithLearningHub066.jpg')
     if image_path:
         with open(image_path, 'rb') as f:
             post1.picture.save(os.path.basename(image_path), File(f), save=True)
+
 
 
     post2 = Post.objects.get_or_create(
@@ -50,6 +52,7 @@ def populate():
     if image_path:
         with open(image_path, 'rb') as f:
             post2.picture.save(os.path.basename(image_path), File(f), save=True)
+
 
     post3 = Post.objects.get_or_create(
         postName = 'university-cafe',
@@ -80,6 +83,8 @@ def populate():
     if image_path:
         with open(image_path, 'rb') as f:
             post4.picture.save(os.path.basename(image_path), File(f), save=True)
+    
+
 
     comment1 = Comment.objects.get_or_create(
         comment='Nice place but really hard to find empty seats😢',
@@ -109,6 +114,11 @@ def createAccounts(username, password,user_type ,email):
         email=email,
         userType= user_type
     )[0]
+
+    image_path = finders.find('images/userPicture.jpg')
+    if image_path:
+        with open(image_path, 'rb') as f:
+            userProfile.user_profile.save(os.path.basename(image_path), File(f), save=True)
     userProfile.save()
     return userProfile
 

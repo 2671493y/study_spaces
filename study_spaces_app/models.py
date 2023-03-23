@@ -36,7 +36,7 @@ class Category(models.Model):
 class Post(models.Model):
     postName = models.CharField(max_length=100,default=None)
     pictureName = models.CharField(max_length=PICTURE_NAME_MAX_LENGTH)
-    picture = models.ImageField(upload_to='static/images',blank=True)
+    picture = models.ImageField(upload_to='post_images',blank=True)
     description = models.CharField(max_length=DESCRIPTION_MAX_LENGTH)
     address = models.CharField(max_length=ADDRESS_MAX_LENGTH)
     likes = models.IntegerField(default=0)

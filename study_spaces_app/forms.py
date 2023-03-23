@@ -52,18 +52,13 @@ class UserProfileForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['postName', 'pictureName', 'picture', 'description', 'address', 'category']
+        fields = ['postName', 'picture', 'description', 'address', 'category']
         widgets = {
             'category': forms.Select(attrs={'class': 'form-control'}),
         }
 
     postName = forms.CharField(
         label='Post Name',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
-    )
-
-    pictureName = forms.CharField(
-        label='Picture Name',
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
 
@@ -82,3 +77,10 @@ class PostForm(forms.ModelForm):
         required=False,
         widget=forms.ClearableFileInput(attrs={'class': 'form-control'})
     )
+
+    def clean_picture(self):
+        picture = self.cleaned_data.get('picture')
+        if picture:
+            self.instance.pictureName = picture.name
+        return picture
+
