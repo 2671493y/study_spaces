@@ -204,9 +204,6 @@ def like_post(request, post_id):
     
     return redirect('category_library', category_name=post.category.category_name)
 
-
-
-
 @login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -223,3 +220,15 @@ def add_comment(request, post_id):
 
     return redirect('study_spaces_app:category_library')
 
+@login_required
+def delete_post(request, post_id):
+    user_profile = UserProfile.objects.get(user=request.user)
+    post = Post.objects.get(id=post_id, user_profile=user_profile)
+    
+    if post:
+        post.delete()
+        messages.success(request, 'Post deleted successfully!')
+    else:
+        messages.error(request, 'Post not found or not authorized to delete.')
+    
+    return redirect('study_spaces_app:userManagement')

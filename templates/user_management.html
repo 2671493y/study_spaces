@@ -20,8 +20,9 @@
           <h5 class="card-title">{{ p.pictureName }}</h5>
           <p class="card-text">{{ p.description }}</p>
           {% if p.picture %}
-            <img class="card-img-top" src="{{ p.picture }}" alt="Picture">
+            <img class="card-img-top" src="{{ p.picture.url }}" alt="Picture">
           {% endif %}
+          <button class="btn btn-danger mt-3" type="button" onclick="window.location.href='{% url 'study_spaces_app:delete_post' p.id %}'">Delete Post</button>
         </div>
       </div>
     {% endfor %}
