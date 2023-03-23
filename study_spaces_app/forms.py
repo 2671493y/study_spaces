@@ -77,3 +77,10 @@ class PostForm(forms.ModelForm):
         required=False,
         widget=forms.ClearableFileInput(attrs={'class': 'form-control'})
     )
+
+    # Override the clean_picture method to set the pictureName field
+    def clean_picture(self):
+        picture = self.cleaned_data.get('picture')
+        if picture:
+            self.instance.pictureName = picture.name
+        return picture
