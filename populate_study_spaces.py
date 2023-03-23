@@ -70,7 +70,7 @@ def populate():
         postName = 'University library',
         pictureName='university_library.jpg',
         description='The University Library has been in existence since the foundation of the University in 1451, and has always been at the centre of the University community. Relocating from the city centre in 1870 to the Gilmorehill campus, the Library continued to evolve and adapt, moving again in 1968 to its current location – a 12 storey building on Hillhead Street.',
-        address='University Of, Hillhead St, Glasgow G12 8QE',
+        address='Hillhead St, Glasgow G12 8QE',
         category=category1,
         user_profile=user_profile3,
         likes = 2,
