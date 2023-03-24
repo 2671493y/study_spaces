@@ -11,16 +11,21 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 
 
-def HomePage(request):
-    if request.user.is_authenticated:
-        context = {
-            'user_is_authenticated': True
+def HomePage(request, category_name='Popular upload'):
+    posts = Post.objects.order_by('-likes')
+    post_comments = {}
+
+    for post in posts:
+        comments = Comment.objects.filter(post=post)
+        post_comments[post.id] = comments
+
+    context = {
+            'category': category_name,
+            'posts': posts,
+            'post_comments': post_comments,
+            'category_name': category_name
         }
-    else:
-        context = {
-            'user_is_authenticated': False
-        }
-    return render(request, 'homepage.html', context=context)
+    return render(request, 'homepage.html', context)
 
 def login_user(request):
     if request.method == 'POST':
@@ -203,6 +208,30 @@ def like_post(request, post_id):
         request.session[session_key] = True
     
     return redirect('category_library', category_name=post.category.category_name)
+# @login_required
+# def like_post(request, post_id):
+#     post = get_object_or_404(Post, id=post_id)
+#     user = request.user
+#     session_key = f'post_{post_id}_liked'
+    
+#     if request.session.get(session_key, False):
+#         post.likes -= 1
+#         post.save()
+#         request.session[session_key] = False
+#     else:
+#         post.likes += 1
+#         post.save()
+#         request.session[session_key] = True
+    
+#     category_name = post.category.category_name
+#     if category_name == 'Library':
+#         return redirect('category_library')
+#     elif category_name == 'bar':
+#         return redirect('category_cafe')
+#     elif category_name == 'bar':
+#         return redirect('category_other')
+#     else:
+#         return redirect('default_page')
 
 
 

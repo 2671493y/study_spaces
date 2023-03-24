@@ -18,6 +18,8 @@ def populate():
     category2 = Category.objects.get_or_create(category_name='Other Place')[0]
     category3 = Category.objects.get_or_create(category_name='Cafe')[0]
 
+
+
     user_profile1 = createAccounts("Eve","password111","Student","user1@email")
     user_profile2 = createAccounts("Cindy","password222","Student","user2@email")
     user_profile3 = createAccounts("Jane","password333","Business","user3@email")
@@ -54,6 +56,7 @@ def populate():
             post2.picture.save(os.path.basename(image_path), File(f), save=True)
 
 
+
     post3 = Post.objects.get_or_create(
         postName = 'university-cafe',
         pictureName='university-cafe.jpg',
@@ -68,6 +71,7 @@ def populate():
     if image_path:
         with open(image_path, 'rb') as f:
             post3.picture.save(os.path.basename(image_path), File(f), save=True)
+
     
     post4 = Post.objects.get_or_create(
         postName = 'University library',
@@ -83,6 +87,7 @@ def populate():
     if image_path:
         with open(image_path, 'rb') as f:
             post4.picture.save(os.path.basename(image_path), File(f), save=True)
+
     
 
 
@@ -119,6 +124,7 @@ def createAccounts(username, password,user_type ,email):
     if image_path:
         with open(image_path, 'rb') as f:
             userProfile.user_profile.save(os.path.basename(image_path), File(f), save=True)
+
     userProfile.save()
     return userProfile
 
