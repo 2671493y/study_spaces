@@ -252,3 +252,15 @@ def delete_post(request, post_id):
         messages.error(request, 'Post not found or not authorized to delete.')
 
     return redirect('study_spaces_app:userManagement')
+
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.user == comment.user_profile.user:
+        comment.delete()
+    return redirect(request.META.get('HTTP_REFERER', 'HomePage'))
+
+
+
+

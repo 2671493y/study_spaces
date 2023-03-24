@@ -36,6 +36,9 @@ urlpatterns = [
     path('Library', views.category_library, name='category_library'),
     path('Cafe', views.category_cafe, name='category_cafe'),
     path('Other Place', views.category_other, name='category_other'),
+    path('delete_comment/<int:comment_id>/', views.delete_comment, name='delete_comment'),
+
+
 
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
