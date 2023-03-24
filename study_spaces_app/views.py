@@ -208,31 +208,6 @@ def like_post(request, post_id):
         request.session[session_key] = True
     
     return redirect('category_library', category_name=post.category.category_name)
-# @login_required
-# def like_post(request, post_id):
-#     post = get_object_or_404(Post, id=post_id)
-#     user = request.user
-#     session_key = f'post_{post_id}_liked'
-    
-#     if request.session.get(session_key, False):
-#         post.likes -= 1
-#         post.save()
-#         request.session[session_key] = False
-#     else:
-#         post.likes += 1
-#         post.save()
-#         request.session[session_key] = True
-    
-#     category_name = post.category.category_name
-#     if category_name == 'Library':
-#         return redirect('category_library')
-#     elif category_name == 'bar':
-#         return redirect('category_cafe')
-#     elif category_name == 'bar':
-#         return redirect('category_other')
-#     else:
-#         return redirect('default_page')
-
 
 
 

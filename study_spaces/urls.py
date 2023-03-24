@@ -33,6 +33,9 @@ urlpatterns = [
     path('category_library/<str:category_name>/', category_library, name='category_library'),
     path('category_cafe/<str:category_name>/', category_cafe, name='category_cafe'),
     path('category_other/<str:category_name>/', category_cafe, name='category_other'),
+    path('Library', views.category_library, name='category_library'),
+    path('Cafe', views.category_cafe, name='category_cafe'),
+    path('Other Place', views.category_other, name='category_other'),
 
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
