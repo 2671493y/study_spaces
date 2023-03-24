@@ -1,0 +1,32 @@
+{% extends 'bootstrap-base.html' %}
+
+{% block title %}Create a Post{% endblock %}
+
+{% block body_block %}
+    <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <h2 class="mb-4">Create a new post</h2>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {% if field.name == 'picture' %}
+                <div class="custom-file">
+                  {{ field }}
+                  <label class="custom-file-label" for="{{ field.id_for_label }}">Choose file</label>
+                </div>
+              {% elif field.name == 'category' %}
+                {{ field }}
+              {% else %}
+                {{ field }}
+              {% endif %}
+            </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

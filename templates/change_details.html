@@ -1,0 +1,56 @@
+{% extends 'bootstrap-base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Account settings  
+{% endblock %}
+
+{% block body_block %}
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h1 class="mb-4">Change details of {{ request.user }}</h1>
+    {% if errors %}
+      <div class="alert alert-danger" role="alert">
+        <ul>
+          {% for error in errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    <form method="post" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="username" class="form-label">Username: {{ request.user.username }}</label>
+        <button type="button" class="btn btn-outline-primary" onclick="showInput('username')">Edit</button>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password: *********</label>
+        <button type="button" class="btn btn-outline-primary" onclick="showInput('password')">Edit</button>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email: {{ request.user.email }}</label>
+        <button type="button" class="btn btn-outline-primary" onclick="showInput('email')">Edit</button>
+      </div>
+      <div class="mb-3">
+        <label for="user_profile" class="form-label">Profile Picture:</label>
+        <button type="button" class="btn btn-outline-primary" onclick="showInput('user_profile')">Edit</button>
+      </div>
+      <button id="submit-button" type="submit" class="btn btn-primary" disabled>Apply changes</button>
+    </form>
+    <div class="mt-3">
+      <a href="{% url 'study_spaces_app:userManagement' %}" class="btn btn-secondary">Back to User Management</a>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/change_details.js' %}"></script>
+
+{% endblock %}
